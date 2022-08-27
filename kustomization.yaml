@@ -1,0 +1,6 @@
+commonAnnotations:
+  vpg: "gb_vpg"
+resources:
+- redis-master-statefulset.yaml
+- redis-worker-statefulset.yaml
+- frontend-statefulset.yaml

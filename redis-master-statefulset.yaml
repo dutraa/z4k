@@ -1,0 +1,49 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: StatefulSet
+metadata:
+  name: redis-master
+  annotations:
+    vpg: ""
+  labels:
+    app: redis
+spec:
+  selector:
+    matchLabels:
+      app: redis
+      role: master
+      tier: backend
+  serviceName: "redis-master"
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        vpg: ""
+      labels:
+        app: redis
+        role: master
+        tier: backend
+    spec:
+      containers:
+      - name: master
+        image: k8s.gcr.io/redis:e2e  # or just image: redis
+        imagePullPolicy: Always
+        command: ["redis-server"]
+        args: ["--appendonly", "yes"]
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        volumeMounts:
+        - mountPath: data
+          name: redis-master-pvc
+        ports:
+        - containerPort: 6379
+  volumeClaimTemplates:
+  - metadata: 
+       name: redis-master-pvc
+    spec:
+       accessModes: [ "ReadWriteOnce" ]
+       storageClassName: default
+       resources:
+           requests:
+               storage: 1Gi

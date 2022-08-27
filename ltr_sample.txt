@@ -1,0 +1,32 @@
+  BackupSettings:
+      RepositoryInformation:
+        BackupTargetType : 
+        AzureBackupRepositoryInformation:
+          StorageAccountName : 
+          DirectoryId : 801d258c-4d8b-4c28-bced-92eda1d626fa
+          CredentialsSecretReference:
+            Site:
+              Id: 
+            Id:
+              Name: 
+              NamespaceId:
+                NamespaceName: default
+      IsCompressionEnabled: true
+      SchedulingAndRetentionSettings:
+         PeriodsSettings:
+         - PeriodType : Yearly
+           Method : Full
+           ExpiresAfterValue : 7
+           ExpiresAfterUnit : Years
+         - PeriodType : Monthly
+           Method : Full
+           ExpiresAfterValue : 12
+           ExpiresAfterUnit : Months
+         - PeriodType : Weekly
+           Method : Full
+           ExpiresAfterValue : 4
+           ExpiresAfterUnit : Weeks
+         - PeriodType : Daily
+           Method : Incremental
+           ExpiresAfterValue : 7
+           ExpiresAfterUnit : Days
